@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Delovunity\OutOfStock\Model\ResourceModel\Subscriptions\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">delovunity_outofstock_subscriptions</argument>
+            <argument name="eventObject" xsi:type="string">delovunity_outofstock_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Delovunity\OutOfStock\Model\ResourceModel\Subscriptions</argument>
+            <argument name="eventPrefix" xsi:type="string">delovunity_outofstock_grid_collection</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Delovunity\OutOfStock\Api\SubscriptionsManagementInterface"
+                type="Delovunity\OutOfStock\Service\SubscriptionsRepository"/>
+    <preference for="Delovunity\OutOfStock\Api\Data\SubscriptionsInterface"
+                type="Delovunity\OutOfStock\Model\Subscriptions"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="delovunity_outofstock_subscriptions_listing_data_source" xsi:type="string">Delovunity\OutOfStock\Model\ResourceModel\Subscriptions\Grid\Collection</item>
+            </argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                </item>
+            </argument>
+        </arguments>
+        <plugin name="delovunity_outofstock_plugin_data_grid"
+                type="Delovunity\OutOfStock\Plugin\DataGrid"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+</config>

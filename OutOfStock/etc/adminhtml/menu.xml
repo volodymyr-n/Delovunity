@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Delovunity_OutOfStock::all" title="Delovunity" module="Delovunity_OutOfStock" sortOrder="51" resource="Delovunity_OutOfStock::outofstock"/>
+        <add id="Delovunity_OutOfStock::outofstacknotification" title="Out of Stock Notification" module="Delovunity_OutOfStock" sortOrder="10"  parent="Delovunity_OutOfStock::all" resource="Delovunity_OutOfStock::outofstock"/>
+        <add id="Delovunity_OutOfStock::hello_configuration" title="Manage Stock Alerts" module="Delovunity_OutOfStock" sortOrder="99" parent="Delovunity_OutOfStock::outofstacknotification" action="outofstock/subscriptions" resource="Delovunity_OutOfStock::subscriptions"/>
+        <add id="Delovunity_OutOfStock::outofstacknotification1" title="Out of Stock Notification" module="Delovunity_OutOfStock" sortOrder="10"  parent="Delovunity_OutOfStock::all" resource="Delovunity_OutOfStock::outofstack"/>
+    </menu>
+</config>

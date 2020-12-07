@@ -1,0 +1,21 @@
+.delovunity_out_of_stock_block label{
+    margin-bottom: 10px;
+}
+
+.delovunity_out_of_stock_block .delovunity_form_input{
+    margin-top: 15px;
+}
+.delovunity_out_of_stock_block input, .delovunity_out_of_stock_block button{
+    padding: 2px 15px;
+    height: 40px;
+}
+.delovunity_out_of_stock_block input{
+    width: 50%;
+    border-radius: 25px 0 0 25px;
+    float: left;
+}
+.delovunity_out_of_stock_block button{
+    width: 25%;
+    border-radius: 0 25px 25px 0;
+    float: left;
+}

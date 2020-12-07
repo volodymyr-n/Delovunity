@@ -1,0 +1,86 @@
+<?php
+
+namespace Delovunity\OutOfStock\Setup;
+
+use Magento\Framework\Setup\InstallSchemaInterface;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
+
+class InstallSchema implements InstallSchemaInterface
+{
+    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    {
+        $installer = $setup;
+        $installer->startSetup();
+        if (!$installer->tableExists('delovunity_outofstock_subscriptions')) {
+            $table = $installer->getConnection()->newTable(
+                $installer->getTable('delovunity_outofstock_subscriptions')
+            )
+                -> addColumn(
+                    'id',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    null,
+                    [
+                        'identity' => true,
+                        'nullable' => false,
+                        'primary'  => true,
+                        'unsigned' => true,
+                    ],
+                    'ID'
+                )
+                ->addColumn(
+                    'id_product',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    11,
+                    [],
+                    'Id Product'
+                )
+                ->addColumn(
+                    'email',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    255,
+                    [],
+                    'Email'
+                )
+                ->addColumn(
+                    'website',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    '64k',
+                    [],
+                    'Website'
+                )
+                ->addColumn(
+                    'id_user',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    11,
+                    [],
+                    'Id user'
+                )
+                ->addColumn(
+                    'created_at',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                    null,
+                    ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT],
+                    'Created At'
+                )->addColumn(
+                    'updated_at',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                    null,
+                    ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE],
+                    'Updated At')
+                ->setComment('Out of Stock');
+            $installer->getConnection()->createTable($table);
+
+            $installer->getConnection()->addIndex(
+                $installer->getTable('delovunity_outofstock_subscriptions'),
+                $setup->getIdxName(
+                    $installer->getTable('delovunity_outofstock_subscriptions'),
+                    ['id_product', 'email', 'website', 'id_user']
+                ),
+                ['id_product', 'email', 'website', 'id_user']
+            );
+        }
+        $installer->endSetup();
+    }
+
+}

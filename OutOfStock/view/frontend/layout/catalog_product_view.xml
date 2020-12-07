@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Delovunity_OutOfStock::css/catalog_product_out_of_stock.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View" name="delovunity.product.info.options.text"  template="Delovunity_OutOfStock::catalog/product/view/addtocart.phtml" before="product.info"/>
+        </referenceContainer>
+    </body>
+</page>

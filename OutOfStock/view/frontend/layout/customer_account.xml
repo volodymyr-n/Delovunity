@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer_delovunity_out_of_stock">
+                <arguments>
+                    <argument name="path" xsi:type="string">my_account_outofstock/subscriptions</argument>
+                    <argument name="label" xsi:type="string">Out of Stock Notification</argument>
+                    <argument name="sortOrder" xsi:type="number">150</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

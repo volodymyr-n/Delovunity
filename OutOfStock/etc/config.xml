@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <out_of_stock>
+            <general>
+                <outofstock_frontend>1</outofstock_frontend>
+                <outofstock_email_mailings>1</outofstock_email_mailings>
+            </general>
+        </out_of_stock>
+    </default>
+</config>

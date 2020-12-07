@@ -1,0 +1,97 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block
+   * @var  \Delovunity\OutOfStock\ViewModel\SubscriptionFrontEnd $viewModel
+ */
+$viewModel = $block->getData('viewModel');
+?>
+<style>
+    table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+    table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    table tbody tr:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.05);
+    }
+    table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    .delete-out-of-stock {
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+    .delete-out-of-stock {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+</style>
+<h3>
+    <?php echo __('My subscriptions to products on sale'); ?>
+</h3>
+<table class="list-element-out_of_stock">
+    <tr>
+        <th><?php echo __('Product name'); ?></th>
+        <th><?php echo __('Email'); ?></th>
+        <th><?php echo __('Date'); ?></th>
+        <th><?php echo __('Action'); ?></th>
+    </tr>
+<?php
+
+/**
+ * @var \Delovunity\OutOfStock\Model\Subscriptions $item
+ */
+foreach ($viewModel->getSubscription() as $item):
+    ?>
+
+<tr class="element_out_of_stock">
+    <td class="product_name_out_of_stock">
+        <a href="<?php
+        echo $viewModel->getProductUrl($item->getIdProduct()); ?>">
+            <?php
+            echo $item->getValue();
+            ?>
+        </a>
+    </td>
+    <td class="email_out_of_stock">
+        <?php
+        echo $item->getEmail();
+        ?>
+    </td>
+    <td class="date_out_of_stock">
+        <?php
+        echo $item->getCreatedAt();
+        ?>
+    </td>
+    <td class="delete_out_of_stock">
+        <form action="/my_account_out_of_stock/subscriptions/delete" method="subscriptions">
+            <input type="hidden" name="id" value="<?php echo $item->getId(); ?>">
+            <input type="submit" value="<?php echo __('Delete'); ?>" class="delete-out-of-stock">
+            </form>
+    </td>
+</tr>
+    <?php
+endforeach;
+?>
+</table>
+

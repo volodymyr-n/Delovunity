@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View; */
+$_product = $block->getProduct();
+$helper = $this->helper('Delovunity\OutOfStock\Helper\Data');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->create('Magento\Customer\Model\Session');
+
+?>
+
+<?php $buttonTitle = __('Subscribe'); ?>
+<?php $labelText = __('Subscribe to back in stock notification'); ?>
+<?php
+
+if ($helper->isFrontEnd() && !$_product->isSaleable()) :?>
+<div class="delovunity_out_of_stock_block">
+    <form onsubmit="return false">
+    <input type="hidden" id="delovunity_out_of_stock_product_id" value="<?php echo $_product->getId(); ?>">
+            <label for="email_out_of_stock">
+                <span> <?php echo $labelText; ?> </span>
+            </label>
+
+    <div class="delovunity_form_input">
+            <input type="email"
+                       name="delovunity_out_of_stock_email"
+                       id="delovunity_out_of_stock_email"
+                       placeholder="example@gmail.com"
+                       class="input-text"
+                   minlength="5"
+                  <?php  if ($customerSession->isLoggedIn()) :?>
+                  value="<?php echo $$customerSession->getCustomer()->getEmail(); ?>"
+                  <?php
+                  endif;
+                  ?>
+                />
+                <button type="submit"
+                        title="<?php echo $buttonTitle; ?>"
+                        class="action primary tocart"
+                        id="delovunity_out_of_stock_button">
+                    <span><?php echo $buttonTitle; ?></span>
+                </button>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+    </form>
+</div>
+    <?php
+endif;
+    $ajaxurl = $block->getFormAction();
+    echo $ajaxurl;
+    ?>
+
